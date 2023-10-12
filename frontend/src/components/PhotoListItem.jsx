@@ -1,21 +1,30 @@
 import React from "react";
 
 import "../styles/PhotoListItem.scss";
+import PhotoFavButton from "./PhotoFavButton";
 
 
 
 
 
-const PhotoListItem = (props) => {
+const PhotoListItem = ({id, location, imageSource, name, profile, isFavorite, toggleFavorites}) => {
   /* Insert React */
 
+  // const handletoggleFavorites = () => {
+  //   toggleFavorites(id);
+  // }
 
   return (
     <div className="photo-list__item">
-      <img src={props.imageSource}/>
-      <h2><img src={props.profile}/></h2>
-      <h2>{props.name}</h2>
-      <h2>{props.location.city}, {props.location.country}</h2>
+      <PhotoFavButton 
+        photoId={id}
+        isFavorite={isFavorite}
+        toggleFavorites={toggleFavorites} 
+      />
+      <img src={imageSource}/>
+      <h2><img src={profile}/></h2>
+      <h2>{name}</h2>
+      <h2>{location.city}, {location.country}</h2>
     </div>
   );
 

@@ -60,13 +60,14 @@ import photos from 'mocks/photos';
 
 
 
-const PhotoList = () => {
+const PhotoList = ({favPhotos, toggleFavorites}) => {
+  // console.log("favphotos:::", favPhotos);
   return (
     <ul className="photo-list">
       {/* Insert React */}
       {photos.map((photo) => {
         return (
-          <PhotoListItem
+          <PhotoListItem 
             className="photo-list"
             key={photo.id}
             id={photo.id}
@@ -74,6 +75,8 @@ const PhotoList = () => {
             imageSource={photo.urls.regular}
             name={photo.user.name}
             profile={photo.user.profile}
+            toggleFavorites={toggleFavorites}
+            isFavorite={favPhotos.includes(photo)}
           />
         );
       })}
