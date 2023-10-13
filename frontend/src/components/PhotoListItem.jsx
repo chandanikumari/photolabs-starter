@@ -7,7 +7,7 @@ import PhotoFavButton from "./PhotoFavButton";
 
 
 
-const PhotoListItem = ({id, location, imageSource, name, profile, isFavorite, toggleFavorites}) => {
+const PhotoListItem = ({ id, location, imageSource, name, profile, isFavorite, toggleFavorites, modalOnClick, photo }) => {
   /* Insert React */
 
   // const handletoggleFavorites = () => {
@@ -16,15 +16,23 @@ const PhotoListItem = ({id, location, imageSource, name, profile, isFavorite, to
 
   return (
     <div className="photo-list__item">
-      <PhotoFavButton 
+      <PhotoFavButton
         photoId={id}
         isFavorite={isFavorite}
-        toggleFavorites={toggleFavorites} 
+        toggleFavorites={toggleFavorites}
+        onClick={() => toggleFavorites(photo.id)}
+        modalOnClick={modalOnClick}
       />
-      <img src={imageSource}/>
-      <h2><img src={profile}/></h2>
-      <h2>{name}</h2>
-      <h2>{location.city}, {location.country}</h2>
+      <img src={imageSource} className="photo-list__image" onClick={() => { modalOnClick(photo) }} />
+      <div className="photo-list__user-details">
+        <h2><img src={profile} className="photo-list__user-profile" /></h2>
+      </div>
+      <div className="photo-list__user-info">{name}
+        <div className="photo-list__user-location">
+          {location.city}, {location.country}
+        </div>
+      </div>
+
     </div>
   );
 
