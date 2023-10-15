@@ -4,7 +4,7 @@ import '../styles/HomeRoute.scss';
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 const HomeRoute = (props) => {
-  // console.log("home route props:", props);
+  console.log("home route props:", props);
   return (
     <div className="home-route">
       {/* Insert React */}
