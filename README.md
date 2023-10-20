@@ -22,3 +22,13 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+
+## Screenshots
+
+![](./docs/homePage.png)
+
+
+![](./docs/favPhotos.png)
+
+
+![](./docs/modal.png)
