@@ -10,7 +10,7 @@ import "../styles/TopicListItem.scss";
 
 const TopicListItem = (props) => {
   return (
-    <div className="topic-list__item">
+    <div className="topic-list__item" onClick={() => props.selectTopic(props.id)}>
       {/* Insert React */}
       <a>{props.title}</a>
     </div>

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import './App.scss';
 
-import photos from 'mocks/photos';
-import topics from 'mocks/topics';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import useApplicationData from './hooks/useApplicationData'
@@ -12,34 +10,35 @@ import useApplicationData from './hooks/useApplicationData'
 
 const App = () => {
   const {
-    // onPhotoSelect,
+    
     toggleFavorites,
-    // onLoadTopic,
+    selectTopic,
     modalOnClick,
-    state: {
-      photos,
-      topics,
-      favPhotos,
-      showModal
-    }
+    state
   } = useApplicationData();
 
-  const hasFavPhotos = (state.favPhotos.length) ? true: false;
-  
+  console.log("FavPhotos", state.favPhotos);
+  // const hasFavPhotos = (state?.favPhotos?.length) ? true: false;
+  console.log("ID", state.showModal.selectedPhoto);
   return (
     <div className="App">
       <HomeRoute 
-      hasFavPhotos={hasFavPhotos}
+      // hasFavPhotos={hasFavPhotos}
+      favPhotos={state.favPhotos}
       toggleFavorites={toggleFavorites} 
       modalOnClick={modalOnClick}
       photos={state.photos}
-      topics={state.topics} />
+      topics={state.topics}
+      selectTopic={selectTopic} />
 
+      
       {state.showModal.isOpen === true &&
         <PhotoDetailsModal
+          onClose={modalOnClick}
           modalOnClick={modalOnClick}
-          id={state.showModal.selectedPhoto}
+          selectedPhoto={state.showModal.selectedPhoto}
           photos={state.photos}
+          favPhotos={state.favPhotos}
           toggleFavorites={toggleFavorites}
         />
       }

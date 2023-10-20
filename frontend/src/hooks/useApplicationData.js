@@ -1,10 +1,7 @@
 import React from "react";
-import photos from "mocks/photos";
-import topics from "mocks/topics";
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 
 const useApplicationData = () => {
-  debugger;
   const initialState = {
     photos: [],
     topics: [],
@@ -42,11 +39,72 @@ const useApplicationData = () => {
     }
   }
 
+  const selectTopic = (topic) => {
+    // (state.topicId === topic) ?
+    //   dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, value: null }) :
+    //   dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, value: topic });
+    fetch(`http://localhost:8001/api/topics/photos/${topic}`)
+        .then(res => res.json())
+        .then(data => {
+          dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: data });
+        })
+        .catch(error => {
+          console.error('Error Fetching Photos: ', error);
+        });
+  };
+
+  // // Gets all photos from the server.
+  // // Only runs when no topic is selected.
+  useEffect(() => {
+    // if (state.topicId === null) {
+      fetch('http://localhost:8001/api/photos')
+        .then(res => res.json())
+        .then(data => {
+          dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: data });
+        })
+        .catch(error => {
+          console.error('Error Fetching Photos: ', error);
+        });
+    // }
+  }, []);
+
+  // Gets all topics from the server.
+  // Only runs on refresh
+  useEffect(() => {
+    console.log("Executing");
+    fetch('http://localhost:8001/api/topics')
+      .then(res => res.json())
+      .then(data => {
+        console.log("topics.then", data);
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, value: data });
+      })
+      .catch(error => {
+        console.error('Error Fetching Topics: ', error);
+      });
+  }, []);
+
+  // Gets all photos for selected topic.
+  // Only runs when a topic is selected.
+  // useEffect(() => {
+  //   if (state.topicId !== null) {
+  //     fetch(`http://localhost:8001/api/topics/photos/${state.topicId}`)
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: data });
+  //       })
+  //       .catch(error => {
+  //         console.error('Error Fetching Photos: ', error);
+  //       });
+  //   }
+  // }, [state.topicId]);
+
+
   return {
     state,
     toggleFavorites,
     // setPhotoSelected,
-    modalOnClick
+    modalOnClick,
+    selectTopic
   };
 };
 
@@ -77,6 +135,7 @@ export const ACTIONS = {
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.FAV_PHOTO_ADDED:
+      console.log("Troubleshooting:");
       return {
         ...state,
         favPhotos: [...state.favPhotos, action.value],
@@ -94,23 +153,28 @@ function reducer(state, action) {
         photos: action.value
       };
 
-    // case ACTIONS.SET_TOPIC_DATA:
-    //   return {
-    //     ...state,
-    //     topics: action.value
-    //   };
+    case ACTIONS.SET_TOPIC_DATA:
+      console.log("TopicsData",action.value);
+      return {
+        ...state,
+        topics: action.value
+  
+      };
 
     case ACTIONS.SELECT_PHOTO:
+      console.log("troubleshoot", action.value);
       return {
         ...state,
         showModal: action.value
       };
 
-    // case ACTIONS.GET_PHOTOS_BY_TOPICS:
-    //   return {
-    //     ...state,
-    //     topicId: action.value
-    //   };
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      console.log("PhotosByTopics", action.value);
+      return {
+        ...state,
+        topicId: action.value
+      };
+
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`

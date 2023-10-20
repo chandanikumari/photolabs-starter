@@ -7,10 +7,12 @@ function PhotoFavButton(props) {
   // console.log("photofavbutton,", props.isFavorite);
 
   return (
-    <div className="photo-list__fav-icon" onClick={() => props.toggleFavorites(props.photoId)}>
+    <div className="photo-list__fav-icon">
       <div className="photo-list__fav-icon-svg">
-        {/* Insert React */}
-        <FavIcon selected={ props.isFavorite } />
+        <div onClick={() => props.toggleFavorites(props.photoId)}>
+          {/* Insert React */}
+          <FavIcon selected={props.isFavorite}/>
+        </div>
       </div>
     </div>
   );
