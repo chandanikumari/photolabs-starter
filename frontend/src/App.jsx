@@ -17,13 +17,9 @@ const App = () => {
     state
   } = useApplicationData();
 
-  console.log("FavPhotos", state.favPhotos);
-  // const hasFavPhotos = (state?.favPhotos?.length) ? true: false;
-  console.log("ID", state.showModal.selectedPhoto);
   return (
     <div className="App">
       <HomeRoute 
-      // hasFavPhotos={hasFavPhotos}
       favPhotos={state.favPhotos}
       toggleFavorites={toggleFavorites} 
       modalOnClick={modalOnClick}

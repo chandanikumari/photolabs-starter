@@ -4,10 +4,8 @@ import '../styles/PhotoList.scss';
 import PhotoListItem from './PhotoListItem';
 
 const PhotoList = ({photos, favPhotos, toggleFavorites, modalOnClick}) => {
-  // console.log("favphotos:::", favPhotos);
   return (
     <ul className="photo-list">
-      {/* Insert React */}
       {photos.map((photo) => {
         return (
           <PhotoListItem 

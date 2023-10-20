@@ -3,17 +3,8 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-
-
-
-
 const PhotoListItem = ({ id, location, imageSource, name, profile, isFavorite, toggleFavorites, modalOnClick, photo }) => {
-  /* Insert React */
-
-  // const handletoggleFavorites = () => {
-  //   toggleFavorites(id);
-  // }
-
+  
   return (
     <div className="photo-list__item">
       <PhotoFavButton
