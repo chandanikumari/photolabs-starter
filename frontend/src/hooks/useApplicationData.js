@@ -31,7 +31,7 @@ const useApplicationData = () => {
   }
 
   const selectTopic = (topic) => {
-    fetch(`http://localhost:8001/api/topics/photos/${topic}`)
+    fetch(`/api/topics/photos/${topic}`)
       .then(res => res.json())
       .then(data => {
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: data });
@@ -44,7 +44,7 @@ const useApplicationData = () => {
   // // Gets all photos from the server.
   // // Only runs when no topic is selected.
   useEffect(() => {
-    fetch('http://localhost:8001/api/photos')
+    fetch('/api/photos')
       .then(res => res.json())
       .then(data => {
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, value: data });
@@ -58,7 +58,7 @@ const useApplicationData = () => {
   // Gets all topics from the server.
   // Only runs on refresh
   useEffect(() => {
-    fetch('http://localhost:8001/api/topics')
+    fetch('/api/topics')
       .then(res => res.json())
       .then(data => {
         console.log("topics.then", data);
