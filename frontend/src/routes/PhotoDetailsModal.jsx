@@ -6,7 +6,6 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoFavButton from 'components/PhotoFavButton';
 
 const PhotoDetailsModal = ({ onClose, photos, favPhotos, toggleFavorites, selectedPhoto }) => {
-  console.log("photodetailsmodal", onClose);
   return (
     <div className="photo-details-modal">
 
@@ -15,8 +14,9 @@ const PhotoDetailsModal = ({ onClose, photos, favPhotos, toggleFavorites, select
       </button>
       <div className="photo-details-modal__images">
         <PhotoFavButton
-          photoId={photos.id}
+          photoId={selectedPhoto.id}
           toggleFavorites={toggleFavorites}
+          isFavorite={favPhotos?.includes(selectedPhoto.id)}
         />
 
         <img src={selectedPhoto.urls.full} className="photo-details-modal__image" />
